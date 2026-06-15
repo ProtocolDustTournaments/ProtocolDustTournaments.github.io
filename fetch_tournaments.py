@@ -36,6 +36,7 @@ ELO_K_FACTOR = 512
 # their rating is shown at full confidence. Below this threshold their
 # displayed rating is linearly damped back toward ELO_START_RATING.
 ELO_FULL_CONFIDENCE_MATCHES = 10
+ELO_FULL_CONFIDENCE_PARTICIPANTS = 16
 
 
 def api_get(path, params=None):
@@ -129,6 +130,7 @@ def compute_elo(
     start_rating=ELO_START_RATING,
     k=ELO_K_FACTOR,
     full_confidence_matches=ELO_FULL_CONFIDENCE_MATCHES,
+    full_confidence_participants=ELO_FULL_CONFIDENCE_PARTICIPANTS,
 ):
     """
     completed_tournaments_with_data: list of dicts with keys:
@@ -145,6 +147,10 @@ def compute_elo(
     is still treated as low-confidence. Confidence scales linearly from 0
     to 1 over the first `full_confidence_matches` completed matches, after
     which the displayed rating equals the raw Elo rating.
+
+    Each match's K factor is also scaled by tournament size relative to
+    `full_confidence_participants`. A 4-person tournament scales K down;
+    a 32-person tournament scales K up proportionally.
     """
     ratings = {}
     names = {}
@@ -169,6 +175,12 @@ def compute_elo(
             matches_played.setdefault(key, 0)
             tournaments_played[key] = tournaments_played.get(key, 0) + 1
 
+        # Scale K by tournament size: more players = higher stakes.
+        # At full_confidence_participants the multiplier is exactly 1.0.
+        num_participants = len(t["participants"])
+        size_scale = num_participants / full_confidence_participants if full_confidence_participants > 0 else 1.0
+        scaled_k = k * size_scale
+
         # Process matches in id order as a stable approximation of chronological order
         match_list = sorted(t["matches"], key=lambda m: m.get("id") or 0)
 
@@ -191,8 +203,8 @@ def compute_elo(
             expected_winner = 1 / (1 + 10 ** ((r_loser - r_winner) / 400))
             expected_loser = 1 - expected_winner
 
-            ratings[wk] = r_winner + k * (1 - expected_winner)
-            ratings[lk] = r_loser + k * (0 - expected_loser)
+            ratings[wk] = r_winner + scaled_k * (1 - expected_winner)
+            ratings[lk] = r_loser + scaled_k * (0 - expected_loser)
 
             wins[wk] += 1
             losses[lk] += 1
@@ -313,6 +325,7 @@ def main():
         start_rating=ELO_START_RATING,
         k=ELO_K_FACTOR,
         full_confidence_matches=ELO_FULL_CONFIDENCE_MATCHES,
+        full_confidence_participants=ELO_FULL_CONFIDENCE_PARTICIPANTS,
     )
 
     # Hide players with no recorded wins or losses (e.g. never had a
@@ -325,6 +338,7 @@ def main():
         "starting_rating": ELO_START_RATING,
         "k_factor": ELO_K_FACTOR,
         "full_confidence_matches": ELO_FULL_CONFIDENCE_MATCHES,
+        "full_confidence_participants": ELO_FULL_CONFIDENCE_PARTICIPANTS,
         "players": leaderboard,
     }
 
