@@ -37,6 +37,10 @@ ELO_K_FACTOR = 512
 # displayed rating is linearly damped back toward ELO_START_RATING.
 ELO_FULL_CONFIDENCE_MATCHES = 10
 ELO_FULL_CONFIDENCE_PARTICIPANTS = 16
+# How much rating a known player loses for skipping a tournament.
+# This is applied as a phantom loss against a virtual opponent rated
+# at start_rating, scaled by tournament size the same way real matches are.
+ELO_ABSENCE_PENALTY = 0.25  # fraction of scaled_k lost per skipped tournament
 
 
 def api_get(path, params=None):
@@ -131,6 +135,7 @@ def compute_elo(
     k=ELO_K_FACTOR,
     full_confidence_matches=ELO_FULL_CONFIDENCE_MATCHES,
     full_confidence_participants=ELO_FULL_CONFIDENCE_PARTICIPANTS,
+    absence_penalty=ELO_ABSENCE_PENALTY,
 ):
     """
     completed_tournaments_with_data: list of dicts with keys:
@@ -151,6 +156,9 @@ def compute_elo(
     Each match's K factor is also scaled by tournament size relative to
     `full_confidence_participants`. A 4-person tournament scales K down;
     a 32-person tournament scales K up proportionally.
+
+    Players who skip a tournament receive a phantom-loss penalty scaled
+    by `absence_penalty` and tournament size, so staying active matters.
     """
     ratings = {}
     names = {}
@@ -158,6 +166,7 @@ def compute_elo(
     losses = {}
     tournaments_played = {}
     matches_played = {}  # decisive matches (complete state with a winner/loser)
+    tournaments_skipped = {}
 
     # Process tournaments in chronological order
     ordered = sorted(completed_tournaments_with_data, key=lambda t: t["start_at"] or "")
@@ -173,6 +182,7 @@ def compute_elo(
             wins.setdefault(key, 0)
             losses.setdefault(key, 0)
             matches_played.setdefault(key, 0)
+            tournaments_skipped.setdefault(key, 0)
             tournaments_played[key] = tournaments_played.get(key, 0) + 1
 
         # Scale K by tournament size: more players = higher stakes.
@@ -211,6 +221,17 @@ def compute_elo(
             matches_played[wk] += 1
             matches_played[lk] += 1
 
+        # Absence decay: players who exist but skipped this tournament
+        # lose rating as if they took a phantom loss against a start_rating
+        # opponent, scaled by tournament size.
+        if absence_penalty > 0:
+            for key in list(ratings.keys()):
+                if key not in id_to_key.values():
+                    r = ratings[key]
+                    expected = 1 / (1 + 10 ** ((start_rating - r) / 400))
+                    ratings[key] = r + scaled_k * absence_penalty * (0 - expected)
+                    tournaments_skipped[key] = tournaments_skipped.get(key, 0) + 1
+
     leaderboard = []
     for key, raw_rating in ratings.items():
         played = matches_played.get(key, 0)
@@ -230,6 +251,7 @@ def compute_elo(
             "matches_played": played,
             "wins": wins[key],
             "losses": losses[key],
+            "tournaments_skipped": tournaments_skipped.get(key, 0),
         })
 
     leaderboard.sort(key=lambda r: r["rating"], reverse=True)
@@ -326,6 +348,7 @@ def main():
         k=ELO_K_FACTOR,
         full_confidence_matches=ELO_FULL_CONFIDENCE_MATCHES,
         full_confidence_participants=ELO_FULL_CONFIDENCE_PARTICIPANTS,
+        absence_penalty=ELO_ABSENCE_PENALTY,
     )
 
     # Hide players with no recorded wins or losses (e.g. never had a
@@ -339,6 +362,7 @@ def main():
         "k_factor": ELO_K_FACTOR,
         "full_confidence_matches": ELO_FULL_CONFIDENCE_MATCHES,
         "full_confidence_participants": ELO_FULL_CONFIDENCE_PARTICIPANTS,
+        "absence_penalty": ELO_ABSENCE_PENALTY,
         "players": leaderboard,
     }
 
