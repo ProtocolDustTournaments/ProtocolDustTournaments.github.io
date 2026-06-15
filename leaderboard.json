@@ -1,14 +1,15 @@
 {
   "game": "DUST: Virtual Combat",
-  "last_updated": "2026-06-15T03:20:23.457994Z",
+  "last_updated": "2026-06-15T04:06:33.468891Z",
   "starting_rating": 1200,
   "k_factor": 512,
   "full_confidence_matches": 10,
+  "full_confidence_participants": 16,
   "players": [
     {
       "name": "k007jar",
-      "rating": 2646,
-      "raw_rating": 2646,
+      "rating": 2125,
+      "raw_rating": 2125,
       "confidence": 1.0,
       "tournaments_played": 5,
       "matches_played": 21,
@@ -16,49 +17,9 @@
       "losses": 5
     },
     {
-      "name": "Reekken617",
-      "rating": 2138,
-      "raw_rating": 2138,
-      "confidence": 1.0,
-      "tournaments_played": 6,
-      "matches_played": 24,
-      "wins": 15,
-      "losses": 9
-    },
-    {
-      "name": "Elephant_12011",
-      "rating": 1942,
-      "raw_rating": 2127,
-      "confidence": 0.8,
-      "tournaments_played": 2,
-      "matches_played": 8,
-      "wins": 5,
-      "losses": 3
-    },
-    {
-      "name": "Paletoez (flying sparrow)",
-      "rating": 1761,
-      "raw_rating": 1761,
-      "confidence": 1.0,
-      "tournaments_played": 3,
-      "matches_played": 14,
-      "wins": 11,
-      "losses": 3
-    },
-    {
-      "name": "Master_Ambush",
-      "rating": 1643,
-      "raw_rating": 1643,
-      "confidence": 1.0,
-      "tournaments_played": 3,
-      "matches_played": 13,
-      "wins": 7,
-      "losses": 6
-    },
-    {
       "name": "\u0280\u1d0f\u0299\u0299",
-      "rating": 1630,
-      "raw_rating": 1630,
+      "rating": 2024,
+      "raw_rating": 2024,
       "confidence": 1.0,
       "tournaments_played": 3,
       "matches_played": 16,
@@ -66,9 +27,29 @@
       "losses": 5
     },
     {
+      "name": "Reekken617",
+      "rating": 1845,
+      "raw_rating": 1845,
+      "confidence": 1.0,
+      "tournaments_played": 6,
+      "matches_played": 24,
+      "wins": 15,
+      "losses": 9
+    },
+    {
+      "name": "Paletoez (flying sparrow)",
+      "rating": 1817,
+      "raw_rating": 1817,
+      "confidence": 1.0,
+      "tournaments_played": 3,
+      "matches_played": 14,
+      "wins": 11,
+      "losses": 3
+    },
+    {
       "name": "Cubeking",
-      "rating": 1604,
-      "raw_rating": 1604,
+      "rating": 1646,
+      "raw_rating": 1646,
       "confidence": 1.0,
       "tournaments_played": 3,
       "matches_played": 14,
@@ -76,19 +57,29 @@
       "losses": 5
     },
     {
-      "name": "CINDER_OF_DEPTHS",
-      "rating": 1400,
-      "raw_rating": 1699,
-      "confidence": 0.4,
-      "tournaments_played": 1,
-      "matches_played": 4,
-      "wins": 2,
-      "losses": 2
+      "name": "Elephant_12011",
+      "rating": 1383,
+      "raw_rating": 1428,
+      "confidence": 0.8,
+      "tournaments_played": 2,
+      "matches_played": 8,
+      "wins": 5,
+      "losses": 3
     },
     {
-      "name": "CameraMagpieDUST",
-      "rating": 1226,
-      "raw_rating": 1266,
+      "name": "Master_Ambush",
+      "rating": 1373,
+      "raw_rating": 1373,
+      "confidence": 1.0,
+      "tournaments_played": 3,
+      "matches_played": 13,
+      "wins": 7,
+      "losses": 6
+    },
+    {
+      "name": "CINDER_OF_DEPTHS",
+      "rating": 1281,
+      "raw_rating": 1404,
       "confidence": 0.4,
       "tournaments_played": 1,
       "matches_played": 4,
@@ -97,8 +88,8 @@
     },
     {
       "name": "Impim",
-      "rating": 1214,
-      "raw_rating": 1215,
+      "rating": 1268,
+      "raw_rating": 1275,
       "confidence": 0.9,
       "tournaments_played": 4,
       "matches_played": 9,
@@ -106,9 +97,49 @@
       "losses": 6
     },
     {
+      "name": "CameraMagpieDUST",
+      "rating": 1249,
+      "raw_rating": 1323,
+      "confidence": 0.4,
+      "tournaments_played": 1,
+      "matches_played": 4,
+      "wins": 2,
+      "losses": 2
+    },
+    {
+      "name": "Boeds",
+      "rating": 1211,
+      "raw_rating": 1228,
+      "confidence": 0.4,
+      "tournaments_played": 1,
+      "matches_played": 4,
+      "wins": 2,
+      "losses": 2
+    },
+    {
       "name": "MSTJACK",
-      "rating": 1193,
-      "raw_rating": 1177,
+      "rating": 1209,
+      "raw_rating": 1232,
+      "confidence": 0.3,
+      "tournaments_played": 1,
+      "matches_played": 3,
+      "wins": 1,
+      "losses": 2
+    },
+    {
+      "name": "\u13e8\u13a8\u13c1\u13a0\u13ac\u13d2",
+      "rating": 1192,
+      "raw_rating": 1174,
+      "confidence": 0.3,
+      "tournaments_played": 1,
+      "matches_played": 3,
+      "wins": 1,
+      "losses": 2
+    },
+    {
+      "name": "Bman436",
+      "rating": 1188,
+      "raw_rating": 1159,
       "confidence": 0.3,
       "tournaments_played": 1,
       "matches_played": 3,
@@ -117,8 +148,8 @@
     },
     {
       "name": "KingOfDranovis",
-      "rating": 1188,
-      "raw_rating": 1176,
+      "rating": 1173,
+      "raw_rating": 1146,
       "confidence": 0.5,
       "tournaments_played": 1,
       "matches_played": 5,
@@ -126,49 +157,9 @@
       "losses": 2
     },
     {
-      "name": "Bman436",
-      "rating": 1174,
-      "raw_rating": 1114,
-      "confidence": 0.3,
-      "tournaments_played": 1,
-      "matches_played": 3,
-      "wins": 1,
-      "losses": 2
-    },
-    {
-      "name": "Boeds",
-      "rating": 1174,
-      "raw_rating": 1136,
-      "confidence": 0.4,
-      "tournaments_played": 1,
-      "matches_played": 4,
-      "wins": 2,
-      "losses": 2
-    },
-    {
-      "name": "\u13e8\u13a8\u13c1\u13a0\u13ac\u13d2",
-      "rating": 1170,
-      "raw_rating": 1099,
-      "confidence": 0.3,
-      "tournaments_played": 1,
-      "matches_played": 3,
-      "wins": 1,
-      "losses": 2
-    },
-    {
-      "name": "DevoidOverlord",
-      "rating": 1159,
-      "raw_rating": 1063,
-      "confidence": 0.3,
-      "tournaments_played": 1,
-      "matches_played": 3,
-      "wins": 1,
-      "losses": 2
-    },
-    {
-      "name": "Silversss",
-      "rating": 1152,
-      "raw_rating": 958,
+      "name": "guh1216",
+      "rating": 1173,
+      "raw_rating": 1066,
       "confidence": 0.2,
       "tournaments_played": 1,
       "matches_played": 2,
@@ -177,8 +168,8 @@
     },
     {
       "name": "Kcjunk",
-      "rating": 1135,
-      "raw_rating": 985,
+      "rating": 1158,
+      "raw_rating": 1062,
       "confidence": 0.3,
       "tournaments_played": 1,
       "matches_played": 3,
@@ -186,9 +177,9 @@
       "losses": 2
     },
     {
-      "name": "guh1216",
-      "rating": 1132,
-      "raw_rating": 861,
+      "name": "IamSuS09",
+      "rating": 1153,
+      "raw_rating": 963,
       "confidence": 0.2,
       "tournaments_played": 1,
       "matches_played": 2,
@@ -196,39 +187,9 @@
       "losses": 2
     },
     {
-      "name": "RogueWulf1",
-      "rating": 1120,
-      "raw_rating": 799,
-      "confidence": 0.2,
-      "tournaments_played": 1,
-      "matches_played": 2,
-      "wins": 0,
-      "losses": 2
-    },
-    {
-      "name": "DrunkyMonkey",
-      "rating": 1114,
-      "raw_rating": 770,
-      "confidence": 0.2,
-      "tournaments_played": 1,
-      "matches_played": 2,
-      "wins": 0,
-      "losses": 2
-    },
-    {
-      "name": "scabbage",
-      "rating": 1108,
-      "raw_rating": 894,
-      "confidence": 0.3,
-      "tournaments_played": 1,
-      "matches_played": 3,
-      "wins": 1,
-      "losses": 2
-    },
-    {
-      "name": "SparksFR",
-      "rating": 1100,
-      "raw_rating": 699,
+      "name": "Silversss",
+      "rating": 1152,
+      "raw_rating": 961,
       "confidence": 0.2,
       "tournaments_played": 1,
       "matches_played": 2,
@@ -237,38 +198,68 @@
     },
     {
       "name": "Epic88",
-      "rating": 1099,
-      "raw_rating": 695,
+      "rating": 1151,
+      "raw_rating": 953,
       "confidence": 0.2,
       "tournaments_played": 1,
       "matches_played": 2,
       "wins": 0,
+      "losses": 2
+    },
+    {
+      "name": "DevoidOverlord",
+      "rating": 1146,
+      "raw_rating": 1020,
+      "confidence": 0.3,
+      "tournaments_played": 1,
+      "matches_played": 3,
+      "wins": 1,
+      "losses": 2
+    },
+    {
+      "name": "DrunkyMonkey",
+      "rating": 1126,
+      "raw_rating": 829,
+      "confidence": 0.2,
+      "tournaments_played": 1,
+      "matches_played": 2,
+      "wins": 0,
+      "losses": 2
+    },
+    {
+      "name": "SparksFR",
+      "rating": 1125,
+      "raw_rating": 823,
+      "confidence": 0.2,
+      "tournaments_played": 1,
+      "matches_played": 2,
+      "wins": 0,
+      "losses": 2
+    },
+    {
+      "name": "RogueWulf1",
+      "rating": 1112,
+      "raw_rating": 759,
+      "confidence": 0.2,
+      "tournaments_played": 1,
+      "matches_played": 2,
+      "wins": 0,
+      "losses": 2
+    },
+    {
+      "name": "scabbage",
+      "rating": 1095,
+      "raw_rating": 849,
+      "confidence": 0.3,
+      "tournaments_played": 1,
+      "matches_played": 3,
+      "wins": 1,
       "losses": 2
     },
     {
       "name": "amokenquio1",
-      "rating": 1098,
-      "raw_rating": 688,
-      "confidence": 0.2,
-      "tournaments_played": 1,
-      "matches_played": 2,
-      "wins": 0,
-      "losses": 2
-    },
-    {
-      "name": "CINDER_OF_THE_DEPTHS",
-      "rating": 1093,
-      "raw_rating": 986,
-      "confidence": 0.5,
-      "tournaments_played": 2,
-      "matches_played": 5,
-      "wins": 1,
-      "losses": 4
-    },
-    {
-      "name": "IamSuS09",
-      "rating": 1034,
-      "raw_rating": 369,
+      "rating": 1078,
+      "raw_rating": 592,
       "confidence": 0.2,
       "tournaments_played": 1,
       "matches_played": 2,
@@ -277,8 +268,8 @@
     },
     {
       "name": "Logic_Is_Illogical",
-      "rating": 876,
-      "raw_rating": 876,
+      "rating": 1034,
+      "raw_rating": 1034,
       "confidence": 1.0,
       "tournaments_played": 5,
       "matches_played": 16,
@@ -286,9 +277,19 @@
       "losses": 10
     },
     {
+      "name": "CINDER_OF_THE_DEPTHS",
+      "rating": 1010,
+      "raw_rating": 821,
+      "confidence": 0.5,
+      "tournaments_played": 2,
+      "matches_played": 5,
+      "wins": 1,
+      "losses": 4
+    },
+    {
       "name": "Billy6660",
-      "rating": 777,
-      "raw_rating": 730,
+      "rating": 902,
+      "raw_rating": 869,
       "confidence": 0.9,
       "tournaments_played": 5,
       "matches_played": 9,
