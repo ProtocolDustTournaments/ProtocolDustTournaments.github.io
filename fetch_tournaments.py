@@ -29,6 +29,14 @@ CHALLONGE_USERNAMES = [
     # "anotherusername",
 ]
 
+# --- Elo tuning parameters ---
+ELO_START_RATING = 1500
+ELO_K_FACTOR = 32
+# How many *matches* (not tournaments) a player must have played before
+# their rating is shown at full confidence. Below this threshold their
+# displayed rating is linearly damped back toward ELO_START_RATING.
+ELO_FULL_CONFIDENCE_MATCHES = 10
+
 
 def api_get(path, params=None):
     api_key = os.environ.get("CHALLONGE_API_KEY")
@@ -116,19 +124,34 @@ def player_display_name(p):
     return p.get("display_name") or p.get("name") or p.get("challonge_username") or p.get("username") or "Unknown"
 
 
-def compute_elo(completed_tournaments_with_data, start_rating=1500, k=16):
+def compute_elo(
+    completed_tournaments_with_data,
+    start_rating=ELO_START_RATING,
+    k=ELO_K_FACTOR,
+    full_confidence_matches=ELO_FULL_CONFIDENCE_MATCHES,
+):
     """
     completed_tournaments_with_data: list of dicts with keys:
         - start_at: ISO date string (for ordering)
         - participants: list of participant dicts
         - matches: list of match dicts (with winner_id, loser_id, state)
 
-    Returns a dict: player_key -> {"name": ..., "rating": ..., "wins": ..., "losses": ...}
+    Returns a list of dicts:
+        {name, rating, raw_rating, confidence,
+         tournaments_played, matches_played, wins, losses}
+
+    Dampening is based on *matches played* (not tournaments entered) so
+    that a player who entered many events but rarely had decisive matches
+    is still treated as low-confidence. Confidence scales linearly from 0
+    to 1 over the first `full_confidence_matches` completed matches, after
+    which the displayed rating equals the raw Elo rating.
     """
     ratings = {}
     names = {}
     wins = {}
     losses = {}
+    tournaments_played = {}
+    matches_played = {}  # decisive matches (complete state with a winner/loser)
 
     # Process tournaments in chronological order
     ordered = sorted(completed_tournaments_with_data, key=lambda t: t["start_at"] or "")
@@ -143,6 +166,8 @@ def compute_elo(completed_tournaments_with_data, start_rating=1500, k=16):
             ratings.setdefault(key, start_rating)
             wins.setdefault(key, 0)
             losses.setdefault(key, 0)
+            matches_played.setdefault(key, 0)
+            tournaments_played[key] = tournaments_played.get(key, 0) + 1
 
         # Process matches in id order as a stable approximation of chronological order
         match_list = sorted(t["matches"], key=lambda m: m.get("id") or 0)
@@ -171,12 +196,26 @@ def compute_elo(completed_tournaments_with_data, start_rating=1500, k=16):
 
             wins[wk] += 1
             losses[lk] += 1
+            matches_played[wk] += 1
+            matches_played[lk] += 1
 
     leaderboard = []
-    for key, rating in ratings.items():
+    for key, raw_rating in ratings.items():
+        played = matches_played.get(key, 0)
+
+        # Confidence: 0.0 → 1.0 based on matches with decisive outcomes.
+        # A new player with 0 matches stays pinned at start_rating.
+        # At full_confidence_matches they earn their full raw Elo.
+        confidence = min(played / full_confidence_matches, 1.0) if full_confidence_matches > 0 else 1.0
+        displayed_rating = start_rating + (raw_rating - start_rating) * confidence
+
         leaderboard.append({
             "name": names[key],
-            "rating": round(rating),
+            "rating": round(displayed_rating),
+            "raw_rating": round(raw_rating),
+            "confidence": round(confidence, 3),  # expose so frontends can show a "?" badge
+            "tournaments_played": tournaments_played.get(key, 0),
+            "matches_played": played,
             "wins": wins[key],
             "losses": losses[key],
         })
@@ -269,13 +308,23 @@ def main():
             "matches": matches,
         })
 
-    leaderboard = compute_elo(completed_data, start_rating=1500, k=16)
+    leaderboard = compute_elo(
+        completed_data,
+        start_rating=ELO_START_RATING,
+        k=ELO_K_FACTOR,
+        full_confidence_matches=ELO_FULL_CONFIDENCE_MATCHES,
+    )
+
+    # Hide players with no recorded wins or losses (e.g. never had a
+    # decisive match counted)
+    leaderboard = [p for p in leaderboard if not (p["wins"] == 0 and p["losses"] == 0)]
 
     leaderboard_output = {
         "game": GAME_NAME,
         "last_updated": datetime.utcnow().isoformat() + "Z",
-        "starting_rating": 1500,
-        "k_factor": 16,
+        "starting_rating": ELO_START_RATING,
+        "k_factor": ELO_K_FACTOR,
+        "full_confidence_matches": ELO_FULL_CONFIDENCE_MATCHES,
         "players": leaderboard,
     }
 
