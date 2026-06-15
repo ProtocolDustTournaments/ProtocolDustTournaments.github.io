@@ -77,12 +77,19 @@ def get_winner(tournament_id):
     if not winner:
         return None
 
-    name = winner.get("display_name") or winner.get("name") or winner.get("challonge_username") or "Unknown"
+    name = (
+        winner.get("display_name")
+        or winner.get("name")
+        or winner.get("challonge_username")
+        or winner.get("username")
+        or "Unknown"
+    )
 
     avatar_url = None
-    cu = winner.get("challonge_user")
-    if cu and cu.get("image_url"):
-        avatar_url = cu["image_url"]
+    if winner.get("attached_participatable_portrait_url"):
+        avatar_url = winner["attached_participatable_portrait_url"]
+    elif winner.get("email_hash"):
+        avatar_url = f"https://www.gravatar.com/avatar/{winner['email_hash']}?d=mp&s=64"
 
     return {"name": name, "avatar_url": avatar_url}
 
