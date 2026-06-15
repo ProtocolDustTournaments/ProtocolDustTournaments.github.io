@@ -94,6 +94,97 @@ def get_winner(tournament_id):
     return {"name": name, "avatar_url": avatar_url}
 
 
+def fetch_matches(tournament_id):
+    try:
+        data = api_get(f"/tournaments/{tournament_id}/matches")
+    except Exception as e:
+        print(f"Warning: could not fetch matches for tournament {tournament_id}: {e}", file=sys.stderr)
+        return []
+    return [item["match"] for item in data]
+
+
+def player_key(p):
+    """A stable identity key for a participant, preferring Challonge username."""
+    cu = (p.get("challonge_username") or p.get("username") or "").strip().lower()
+    if cu:
+        return f"user:{cu}"
+    name = (p.get("display_name") or p.get("name") or "").strip().lower()
+    return f"name:{name}"
+
+
+def player_display_name(p):
+    return p.get("display_name") or p.get("name") or p.get("challonge_username") or p.get("username") or "Unknown"
+
+
+def compute_elo(completed_tournaments_with_data, start_rating=1500, k=16):
+    """
+    completed_tournaments_with_data: list of dicts with keys:
+        - start_at: ISO date string (for ordering)
+        - participants: list of participant dicts
+        - matches: list of match dicts (with winner_id, loser_id, state)
+
+    Returns a dict: player_key -> {"name": ..., "rating": ..., "wins": ..., "losses": ...}
+    """
+    ratings = {}
+    names = {}
+    wins = {}
+    losses = {}
+
+    # Process tournaments in chronological order
+    ordered = sorted(completed_tournaments_with_data, key=lambda t: t["start_at"] or "")
+
+    for t in ordered:
+        # Map participant id -> player_key
+        id_to_key = {}
+        for p in t["participants"]:
+            key = player_key(p)
+            id_to_key[p["id"]] = key
+            names[key] = player_display_name(p)
+            ratings.setdefault(key, start_rating)
+            wins.setdefault(key, 0)
+            losses.setdefault(key, 0)
+
+        # Process matches in id order as a stable approximation of chronological order
+        match_list = sorted(t["matches"], key=lambda m: m.get("id") or 0)
+
+        for m in match_list:
+            if m.get("state") != "complete":
+                continue
+            winner_id = m.get("winner_id")
+            loser_id = m.get("loser_id")
+            if not winner_id or not loser_id:
+                continue
+            if winner_id not in id_to_key or loser_id not in id_to_key:
+                continue
+
+            wk = id_to_key[winner_id]
+            lk = id_to_key[loser_id]
+
+            r_winner = ratings[wk]
+            r_loser = ratings[lk]
+
+            expected_winner = 1 / (1 + 10 ** ((r_loser - r_winner) / 400))
+            expected_loser = 1 - expected_winner
+
+            ratings[wk] = r_winner + k * (1 - expected_winner)
+            ratings[lk] = r_loser + k * (0 - expected_loser)
+
+            wins[wk] += 1
+            losses[lk] += 1
+
+    leaderboard = []
+    for key, rating in ratings.items():
+        leaderboard.append({
+            "name": names[key],
+            "rating": round(rating),
+            "wins": wins[key],
+            "losses": losses[key],
+        })
+
+    leaderboard.sort(key=lambda r: r["rating"], reverse=True)
+    return leaderboard
+
+
 def to_record(t):
     subdomain = t.get("subdomain")
     url_part = t.get("url")
@@ -103,6 +194,7 @@ def to_record(t):
         full_url = f"https://challonge.com/{url_part}"
 
     record = {
+        "_id": t["id"],
         "name": t.get("name"),
         "state": t.get("state"),
         "participants_count": t.get("participants_count"),
@@ -154,13 +246,43 @@ def main():
         "game": GAME_NAME,
         "source_accounts": CHALLONGE_USERNAMES,
         "last_updated": datetime.utcnow().isoformat() + "Z",
-        "tournaments": results,
+        "tournaments": [{k: v for k, v in r.items() if k != "_id"} for r in results],
     }
 
     with open("tournaments.json", "w") as f:
         json.dump(output, f, indent=2)
 
     print(f"Wrote {len(results)} tournament(s) to tournaments.json")
+
+    # --- Elo leaderboard ---
+    completed_data = []
+    for r in complete:
+        # Find the original tournament dict to get its id
+        tid = r.get("_id")
+        if tid is None:
+            continue
+        participants = fetch_participants(tid)
+        matches = fetch_matches(tid)
+        completed_data.append({
+            "start_at": r["start_at"],
+            "participants": participants,
+            "matches": matches,
+        })
+
+    leaderboard = compute_elo(completed_data, start_rating=1500, k=16)
+
+    leaderboard_output = {
+        "game": GAME_NAME,
+        "last_updated": datetime.utcnow().isoformat() + "Z",
+        "starting_rating": 1500,
+        "k_factor": 16,
+        "players": leaderboard,
+    }
+
+    with open("leaderboard.json", "w") as f:
+        json.dump(leaderboard_output, f, indent=2)
+
+    print(f"Wrote {len(leaderboard)} player(s) to leaderboard.json")
 
 
 if __name__ == "__main__":
