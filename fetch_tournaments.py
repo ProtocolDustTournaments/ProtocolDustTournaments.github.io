@@ -134,7 +134,14 @@ def main():
                     seen_ids.add(t["id"])
 
     state_order = {"underway": 0, "pending": 1, "complete": 2}
-    results.sort(key=lambda r: (state_order.get(r["state"], 3), r["start_at"] or ""))
+
+    # Sort: in-progress first, then upcoming (earliest start first), then
+    # completed (most recent first).
+    others = [r for r in results if r["state"] != "complete"]
+    complete = [r for r in results if r["state"] == "complete"]
+    others.sort(key=lambda r: (state_order.get(r["state"], 3), r["start_at"] or ""))
+    complete.sort(key=lambda r: r["start_at"] or "", reverse=True)
+    results = others + complete
 
     output = {
         "game": GAME_NAME,
