@@ -61,6 +61,32 @@ def matches_game(t):
     return game == GAME_NAME.strip().lower()
 
 
+def fetch_participants(tournament_id):
+    try:
+        data = api_get(f"/tournaments/{tournament_id}/participants")
+    except Exception as e:
+        print(f"Warning: could not fetch participants for tournament {tournament_id}: {e}", file=sys.stderr)
+        return []
+    return [item["participant"] for item in data]
+
+
+def get_winner(tournament_id):
+    """Return {'name': ..., 'avatar_url': ...} for the rank-1 participant, or None."""
+    participants = fetch_participants(tournament_id)
+    winner = next((p for p in participants if p.get("final_rank") == 1), None)
+    if not winner:
+        return None
+
+    name = winner.get("display_name") or winner.get("name") or winner.get("challonge_username") or "Unknown"
+
+    avatar_url = None
+    cu = winner.get("challonge_user")
+    if cu and cu.get("image_url"):
+        avatar_url = cu["image_url"]
+
+    return {"name": name, "avatar_url": avatar_url}
+
+
 def to_record(t):
     subdomain = t.get("subdomain")
     url_part = t.get("url")
@@ -69,7 +95,7 @@ def to_record(t):
     else:
         full_url = f"https://challonge.com/{url_part}"
 
-    return {
+    record = {
         "name": t.get("name"),
         "state": t.get("state"),
         "participants_count": t.get("participants_count"),
@@ -78,6 +104,13 @@ def to_record(t):
         "full_challonge_url": full_url,
         "game_name": t.get("game_name"),
     }
+
+    if t.get("state") == "complete":
+        winner = get_winner(t["id"])
+        if winner:
+            record["winner"] = winner
+
+    return record
 
 
 def main():
