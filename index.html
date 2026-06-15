@@ -117,6 +117,31 @@
   .badge.underway { background: #4a3a2a; color: #f0b86a; }
   .badge.complete { background: #2a3a4a; color: #8ac4f0; }
   .badge.unknown { background: #3a3a3a; color: #ccc; }
+  .winner {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 12px;
+    padding-top: 10px;
+    border-top: 1px solid var(--border);
+    font-size: 0.9rem;
+  }
+  .winner-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--accent);
+    flex-shrink: 0;
+  }
+  .winner-avatar-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--accent);
+    color: #1a0f00;
+    font-weight: bold;
+  }
   .status-msg {
     text-align: center;
     color: var(--muted);
@@ -237,12 +262,25 @@ function render() {
       ? new Date(t.start_at).toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' })
       : 'TBD';
 
+    let winnerHtml = '';
+    if (state === 'complete' && t.winner) {
+      const avatar = t.winner.avatar_url
+        ? `<img src="${t.winner.avatar_url}" alt="${escapeHtml(t.winner.name)}" class="winner-avatar">`
+        : `<div class="winner-avatar winner-avatar-placeholder">${escapeHtml((t.winner.name || '?')[0].toUpperCase())}</div>`;
+      winnerHtml = `
+        <div class="winner">
+          ${avatar}
+          <span>Winner: <strong>${escapeHtml(t.winner.name)}</strong></span>
+        </div>`;
+    }
+
     return `
       <div class="card">
         <h3><a href="${t.full_challonge_url}" target="_blank">${escapeHtml(t.name)}</a></h3>
         <div class="meta">Participants: ${t.participants_count ?? '—'}</div>
         <div class="meta">Start: ${startDate}</div>
         <span class="badge ${state}">${badgeLabel}</span>
+        ${winnerHtml}
       </div>`;
   }).join('');
 }
