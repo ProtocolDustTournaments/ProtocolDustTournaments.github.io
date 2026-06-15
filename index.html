@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DUST: Virtual Combat - Tournaments</title>
+<title>Protocol: DUST Tournaments</title>
 <style>
   :root {
     --bg: #0d0f14;
     --card: #161a22;
-    --accent: #ff3b3b;
+    --accent: #ff8c2b;
     --text: #e6e6e6;
     --muted: #9aa0ab;
     --border: #2a2f3a;
@@ -21,19 +21,31 @@
     min-height: 100vh;
   }
   header {
-    background: linear-gradient(135deg, #1a1d27, #0d0f14);
-    padding: 40px 20px;
-    text-align: center;
+    background: linear-gradient(135deg, #2a1a0d, #0d0f14);
+    padding: 30px 20px;
     border-bottom: 2px solid var(--accent);
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    max-width: 1000px;
+    margin: 0 auto;
   }
-  header h1 {
-    font-size: 2.2rem;
+  header img.logo {
+    height: 70px;
+    width: 70px;
+    border-radius: 10px;
+    object-fit: cover;
+    flex-shrink: 0;
+  }
+  header .title-block h1 {
+    font-size: 2rem;
     letter-spacing: 1px;
     text-transform: uppercase;
+    color: var(--accent);
   }
-  header p {
+  header .title-block p {
     color: var(--muted);
-    margin-top: 8px;
+    margin-top: 6px;
   }
   .controls {
     max-width: 1000px;
@@ -127,8 +139,11 @@
 <body>
 
 <header>
-  <h1>DUST: Virtual Combat</h1>
-  <p>Community Tournament Hub — powered by Challonge</p>
+  <img src="ProtocolDUSTLogo.jpg" alt="Protocol: DUST Logo" class="logo">
+  <div class="title-block">
+    <h1>Protocol: DUST Tournaments</h1>
+    <p>Community Tournament Hub — powered by Challonge</p>
+  </div>
 </header>
 
 <div class="controls">
