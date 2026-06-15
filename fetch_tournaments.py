@@ -31,7 +31,7 @@ CHALLONGE_USERNAMES = [
 
 # --- Elo tuning parameters ---
 ELO_START_RATING = 1200
-ELO_K_FACTOR = 512
+ELO_K_FACTOR = 2048
 # How many *matches* (not tournaments) a player must have played before
 # their rating is shown at full confidence. Below this threshold their
 # displayed rating is linearly damped back toward ELO_START_RATING.
