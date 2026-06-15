@@ -3,17 +3,8 @@
   "source_accounts": [
     "Cubeking"
   ],
-  "last_updated": "2026-06-15T02:10:46.762809Z",
+  "last_updated": "2026-06-15T02:18:04.540646Z",
   "tournaments": [
-    {
-      "name": "Protocol: DUST 2v2s #1",
-      "state": "underway",
-      "participants_count": 4,
-      "start_at": "2025-04-28T15:00:00.000-07:00",
-      "url": "DUST2v2s1",
-      "full_challonge_url": "https://challonge.com/DUST2v2s1",
-      "game_name": "DUST: Virtual Combat"
-    },
     {
       "name": "Protocol: DUST 2v2s #2",
       "state": "pending",
@@ -27,7 +18,7 @@
       "name": "Protocol: DUST #1",
       "state": "complete",
       "participants_count": 19,
-      "start_at": "2025-05-04T17:00:00.000-07:00",
+      "start_at": "2025-05-04T20:00:00.000-04:00",
       "url": "DUST1",
       "full_challonge_url": "https://challonge.com/DUST1",
       "game_name": "DUST: Virtual Combat"
@@ -36,7 +27,7 @@
       "name": "Protocol: DUST 2",
       "state": "complete",
       "participants_count": 8,
-      "start_at": "2025-05-18T17:00:00.000-07:00",
+      "start_at": "2025-05-18T20:00:00.000-04:00",
       "url": "DUST_2",
       "full_challonge_url": "https://challonge.com/DUST_2",
       "game_name": "DUST: Virtual Combat"
@@ -45,7 +36,7 @@
       "name": "Protocol: DUST #3",
       "state": "complete",
       "participants_count": 13,
-      "start_at": "2025-07-10T17:00:00.000-07:00",
+      "start_at": "2025-07-10T20:00:00.000-04:00",
       "url": "dust3",
       "full_challonge_url": "https://challonge.com/dust3",
       "game_name": "DUST: Virtual Combat"
@@ -54,7 +45,7 @@
       "name": "Protocol: DUST #4",
       "state": "complete",
       "participants_count": 7,
-      "start_at": "2025-07-24T17:00:00.000-07:00",
+      "start_at": "2025-07-24T20:00:00.000-04:00",
       "url": "dust4",
       "full_challonge_url": "https://challonge.com/dust4",
       "game_name": "DUST: Virtual Combat"
@@ -63,7 +54,7 @@
       "name": "Protocol: DUST #5",
       "state": "complete",
       "participants_count": 5,
-      "start_at": "2025-08-23T17:00:00.000-07:00",
+      "start_at": "2025-08-23T20:00:00.000-04:00",
       "url": "dust5",
       "full_challonge_url": "https://challonge.com/dust5",
       "game_name": "DUST: Virtual Combat"
@@ -72,7 +63,7 @@
       "name": "Protocol: DUST #6",
       "state": "complete",
       "participants_count": 6,
-      "start_at": "2025-11-14T17:00:00.000-08:00",
+      "start_at": "2025-11-14T20:00:00.000-05:00",
       "url": "dust6",
       "full_challonge_url": "https://challonge.com/dust6",
       "game_name": "DUST: Virtual Combat"
@@ -81,7 +72,7 @@
       "name": "Protocol: DUST #7",
       "state": "complete",
       "participants_count": 5,
-      "start_at": "2025-12-30T17:00:00.000-08:00",
+      "start_at": "2025-12-30T20:00:00.000-05:00",
       "url": "dust7",
       "full_challonge_url": "https://challonge.com/dust7",
       "game_name": "DUST: Virtual Combat"
