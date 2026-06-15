@@ -22,13 +22,15 @@
   }
   header {
     background: linear-gradient(135deg, #2a1a0d, #0d0f14);
-    padding: 30px 20px;
+    padding: 14px 20px;
     border-bottom: 2px solid var(--accent);
     display: flex;
     align-items: center;
     gap: 20px;
     max-width: 1000px;
-    margin: 0 auto;
+    margin: 0 auto 100px auto;
+    position: relative;
+    overflow: visible;
   }
   header img.logo {
     height: 200px;
@@ -36,6 +38,13 @@
     border-radius: 10px;
     object-fit: cover;
     flex-shrink: 0;
+    position: relative;
+    z-index: 2;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.5);
+  }
+  header .title-block {
+    position: relative;
+    z-index: 2;
   }
   header .title-block h1 {
     font-size: 2rem;
