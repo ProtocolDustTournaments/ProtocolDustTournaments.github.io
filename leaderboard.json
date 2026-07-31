@@ -1,66 +1,10 @@
 {
   "game": "DUST: Virtual Combat",
-  "last_updated": "2026-07-31T12:59:50.380644Z",
+  "last_updated": "2026-07-31T15:26:36.455829Z",
   "starting_rating": 1200,
   "k_factor": 1024,
   "full_confidence_matches": 10,
   "full_confidence_participants": 16,
   "absence_penalty": 0.25,
-  "players": [
-    {
-      "name": "Elephant_12011",
-      "rating": 1394,
-      "raw_rating": 1588,
-      "confidence": 0.5,
-      "tournaments_played": 2,
-      "matches_played": 5,
-      "wins": 4,
-      "losses": 1,
-      "tournaments_skipped": 0
-    },
-    {
-      "name": "Cubeking",
-      "rating": 1222,
-      "raw_rating": 1273,
-      "confidence": 0.3,
-      "tournaments_played": 3,
-      "matches_played": 3,
-      "wins": 2,
-      "losses": 1,
-      "tournaments_skipped": 4
-    },
-    {
-      "name": "\u13e8\u13a8\u13c1\u13a0\u13ac\u13d2",
-      "rating": 1160,
-      "raw_rating": 1068,
-      "confidence": 0.3,
-      "tournaments_played": 1,
-      "matches_played": 3,
-      "wins": 1,
-      "losses": 2,
-      "tournaments_skipped": 0
-    },
-    {
-      "name": "Billy6660",
-      "rating": 1130,
-      "raw_rating": 967,
-      "confidence": 0.3,
-      "tournaments_played": 5,
-      "matches_played": 3,
-      "wins": 1,
-      "losses": 2,
-      "tournaments_skipped": 2
-    },
-    {
-      "name": "IamSuS09",
-      "rating": 1124,
-      "raw_rating": 820,
-      "confidence": 0.2,
-      "tournaments_played": 1,
-      "matches_played": 2,
-      "wins": 0,
-      "losses": 2,
-      "tournaments_skipped": 0
-    }
-  ]
+  "players": []
 }
