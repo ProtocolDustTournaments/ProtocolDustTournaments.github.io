@@ -3,13 +3,13 @@
   "source_accounts": [
     "Cubeking"
   ],
-  "last_updated": "2026-08-05T05:50:38.767058Z",
+  "last_updated": "2026-08-05T08:43:50.527685Z",
   "tournaments": [
     {
       "name": "Protocol: DUST 2v2s #2",
       "state": "underway",
       "participants_count": 8,
-      "start_at": "2026-07-13T07:00:00.000+07:00",
+      "start_at": "2026-07-13T10:00:00.000+10:00",
       "url": "DUST2v2s2",
       "full_challonge_url": "https://challonge.com/DUST2v2s2",
       "game_name": "DUST: Virtual Combat"
@@ -18,52 +18,72 @@
       "name": "Protocol: DUST #7",
       "state": "complete",
       "participants_count": 5,
-      "start_at": "2025-12-31T08:00:00.000+07:00",
+      "start_at": "2025-12-31T12:00:00.000+11:00",
       "url": "dust7",
       "full_challonge_url": "https://challonge.com/dust7",
-      "game_name": "DUST: Virtual Combat"
+      "game_name": "DUST: Virtual Combat",
+      "winner": {
+        "name": "Elephant_12011",
+        "avatar_url": "https://user-assets.challonge.com/users/images/007/732/990/xlarge/IMG-20260319-WA0009.png"
+      }
     },
     {
       "name": "Protocol: DUST #6",
       "state": "complete",
       "participants_count": 6,
-      "start_at": "2025-11-15T08:00:00.000+07:00",
+      "start_at": "2025-11-15T12:00:00.000+11:00",
       "url": "dust6",
       "full_challonge_url": "https://challonge.com/dust6",
-      "game_name": "DUST: Virtual Combat"
+      "game_name": "DUST: Virtual Combat",
+      "winner": {
+        "name": "k007jar",
+        "avatar_url": "https://user-assets.challonge.com/users/images/007/482/085/xlarge/IMG_0656.png"
+      }
     },
     {
       "name": "Protocol: DUST #5",
       "state": "complete",
       "participants_count": 5,
-      "start_at": "2025-08-24T07:00:00.000+07:00",
+      "start_at": "2025-08-24T10:00:00.000+10:00",
       "url": "dust5",
       "full_challonge_url": "https://challonge.com/dust5",
-      "game_name": "DUST: Virtual Combat"
+      "game_name": "DUST: Virtual Combat",
+      "winner": {
+        "name": "Reekken617",
+        "avatar_url": "https://user-assets.challonge.com/users/images/007/483/182/xlarge/Screenshot_20240521_183116_YouTube.png"
+      }
     },
     {
       "name": "Protocol: DUST #4",
       "state": "complete",
       "participants_count": 7,
-      "start_at": "2025-07-25T07:00:00.000+07:00",
+      "start_at": "2025-07-25T10:00:00.000+10:00",
       "url": "dust4",
       "full_challonge_url": "https://challonge.com/dust4",
-      "game_name": "DUST: Virtual Combat"
+      "game_name": "DUST: Virtual Combat",
+      "winner": {
+        "name": "k007jar",
+        "avatar_url": "https://user-assets.challonge.com/users/images/007/482/085/xlarge/IMG_0656.png"
+      }
     },
     {
       "name": "Protocol: DUST #3",
       "state": "complete",
       "participants_count": 13,
-      "start_at": "2025-07-11T07:00:00.000+07:00",
+      "start_at": "2025-07-11T10:00:00.000+10:00",
       "url": "dust3",
       "full_challonge_url": "https://challonge.com/dust3",
-      "game_name": "DUST: Virtual Combat"
+      "game_name": "DUST: Virtual Combat",
+      "winner": {
+        "name": "\u0280\u1d0f\u0299\u0299",
+        "avatar_url": "https://user-assets.challonge.com/users/images/007/483/395/xlarge/IMG_5848.png"
+      }
     },
     {
       "name": "Protocol: DUST #2",
       "state": "complete",
       "participants_count": 8,
-      "start_at": "2025-05-19T07:00:00.000+07:00",
+      "start_at": "2025-05-19T10:00:00.000+10:00",
       "url": "DUST_2",
       "full_challonge_url": "https://challonge.com/DUST_2",
       "game_name": "DUST: Virtual Combat",
@@ -76,7 +96,7 @@
       "name": "Protocol: DUST #1",
       "state": "complete",
       "participants_count": 19,
-      "start_at": "2025-05-05T07:00:00.000+07:00",
+      "start_at": "2025-05-05T10:00:00.000+10:00",
       "url": "DUST1",
       "full_challonge_url": "https://challonge.com/DUST1",
       "game_name": "DUST: Virtual Combat",
