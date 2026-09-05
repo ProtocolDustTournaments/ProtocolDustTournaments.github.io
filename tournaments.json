@@ -6,15 +6,6 @@
   "last_updated": "2026-08-06T04:17:10.729703Z",
   "tournaments": [
     {
-      "name": "Protocol: DUST 2v2s #2",
-      "state": "underway",
-      "participants_count": 8,
-      "start_at": "2026-07-13T07:00:00.000+07:00",
-      "url": "DUST2v2s2",
-      "full_challonge_url": "https://challonge.com/DUST2v2s2",
-      "game_name": "DUST: Virtual Combat"
-    },
-    {
       "name": "Protocol: DUST #7",
       "state": "complete",
       "participants_count": 5,
