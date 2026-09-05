@@ -8,11 +8,12 @@
         {
       "name": "Protocol: DUST #8",
       "state": "upcoming",
-      "participants_count": 0,
+      "participants_count": "N/A",
       "start_at": "TBD",
       "url": "dust8",
       "full_challonge_url": "https://challonge.com/dust8",
       "game_name": "DUST: Virtual Combat",
+        },
     {
       "name": "Protocol: DUST #7",
       "state": "complete",
