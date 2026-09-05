@@ -5,6 +5,14 @@
   ],
   "last_updated": "2026-08-06T04:17:10.729703Z",
   "tournaments": [
+        {
+      "name": "Protocol: DUST #7",
+      "state": "upcoming",
+      "participants_count": "N/A",
+      "start_at": "TBD",
+      "url": "dust7",
+      "full_challonge_url": "https://challonge.com/dust8",
+      "game_name": "DUST: Virtual Combat",
     {
       "name": "Protocol: DUST #7",
       "state": "complete",
